@@ -1,9 +1,10 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
+import axios from 'axios';
+import React, { useEffect, useState } from "react";
 
+function App() {
 const [options, setOptions] = useState([]);
-const [to, setTo] = useState("en");
-const [from, setFrom] = useState("en");
+const [to, setTo] = useState('en');
+const [from, setFrom] = useState('en');
 const [input, setInput] = useState("");
 const [output, setOutput] = useState("");
 
@@ -11,9 +12,9 @@ const [output, setOutput] = useState("");
 
 const langTranslate = () => {
   const langParam = {
-    q : input,
-    source : from,
-    target : to,
+    q: input,
+    source: from,
+    target: to,
     api_key: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
   };
 
@@ -31,17 +32,18 @@ useEffect(()=>{
     Headers: {accept: 'application/json'},
   })
     .then((postResult) => {
+      console.log(postResult.data);
       setOptions(postResult.data);
     });
 
 }, []);
 
-function App() {
+
   return (
     <div className="container mt-2">
       <div className="card">
         <div className="card-header bg-primary text-light">
-          React App to translate text in any languages using <a href="https://libretranslate.de/" target="_blank" title="LibreTranslate" className="text-dark">LibreTranslate API</a>
+          <span className='h5'>React App to translate text in any languages using <em>LibreTranslate</em> API</span>
         </div>
 
         <div className="card-body">
@@ -50,7 +52,7 @@ function App() {
               <div className="col-sm-6">
                 {/* Dropdown Menu for convert language From */}
                 <div className="input-group mb-3">
-                  <span className="input-group-text" id="basic-addon1">Lang. From</span>
+                  <span className="input-group-text bg-black text-light" id="basic-addon1">Lang. From</span>
                   <select className="form-select" aria-label="Default select example" id="langFrom" onChange={(e)=> setFrom(e.target.value)}>
                     <option selected>Open this select menu</option>
                     {options.map((opt)=>(
@@ -63,7 +65,7 @@ function App() {
           {/* Dropdown Menu for convert language To */}
               <div className="col-sm-6">
                 <div className="input-group mb-3">
-                  <span className="input-group-text" id="basic-addon1">Lang. To</span>
+                  <span className="input-group-text bg-black text-light" id="basic-addon1">Lang. To</span>
                   <select className="form-select" aria-label="Default select example" id="langTo" onChange={(e)=> setTo(e.target.value)}>
                     <option selected>Open this select menu</option>
                     {options.map((opt)=>(
@@ -80,17 +82,16 @@ function App() {
                   <label for="floatingTextarea">Message</label>
                 </div>
               </div>
-          
           {/* Textarea for output/translated text */}
               <div className="col-sm-6">
                 <div class="form-floating">
-                  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" value={input} readOnly></textarea>
+                  <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" value={output} rows={'30'} readOnly></textarea>
                   <label for="floatingTextarea">Output</label>
                 </div>
               </div>
 
               <div className="col">
-                <button type="submit" class="btn btn-success mt-3" onClick={langTranslate}>Translate</button>&nbsp;&nbsp;
+                <button type="button" class="btn btn-success mt-3" onClick={langTranslate}>Translate</button>&nbsp;&nbsp;
                 <button type="reset" class="btn btn-danger mt-3">Cancel</button>
               </div>
 
