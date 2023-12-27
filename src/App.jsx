@@ -1,10 +1,10 @@
-import axios from 'axios';
-import React, { useEffect, useState } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
 function App() {
 const [options, setOptions] = useState([]);
-const [to, setTo] = useState('en');
-const [from, setFrom] = useState('en');
+const [to, setTo] = useState("en");
+const [from, setFrom] = useState("en");
 const [input, setInput] = useState("");
 const [output, setOutput] = useState("");
 
@@ -12,10 +12,10 @@ const [output, setOutput] = useState("");
 
 const langTranslate = () => {
   const langParam = {
-    q: input,
-    source: from,
-    target: to,
-    api_key: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+    q : input,
+    source : from,
+    target : to,
+    api_key : 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
   };
 
 //Axios.post method to detect the language text
@@ -54,7 +54,6 @@ useEffect(()=>{
                 <div className="input-group mb-3">
                   <span className="input-group-text bg-black text-light" id="basic-addon1">Lang. From</span>
                   <select className="form-select" aria-label="Default select example" id="langFrom" onChange={(e)=> setFrom(e.target.value)}>
-                    <option selected>Open this select menu</option>
                     {options.map((opt)=>(
                       <option key={opt.code} value={opt.code}>{opt.name}</option>
                     ))}
@@ -67,7 +66,6 @@ useEffect(()=>{
                 <div className="input-group mb-3">
                   <span className="input-group-text bg-black text-light" id="basic-addon1">Lang. To</span>
                   <select className="form-select" aria-label="Default select example" id="langTo" onChange={(e)=> setTo(e.target.value)}>
-                    <option selected>Open this select menu</option>
                     {options.map((opt)=>(
                       <option key={opt.code} value={opt.code}>{opt.name}</option>
                     ))}
